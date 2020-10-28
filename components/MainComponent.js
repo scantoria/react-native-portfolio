@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Home from './HomeComponent';
 import About from './AboutComponent';
+import Contact from './ContactComponent';
 import SafeAreaView from 'react-native-safe-area-view';
 import { View, Platform, StyleSheet, ScrollView, Image, Text } from 'react-native';
 import { createStackNavigator } from 'react-navigation-stack';
@@ -54,6 +55,29 @@ const AboutNavigator = createStackNavigator(
   }
 );
 
+const ContactNavigator = createStackNavigator(
+  {
+    Contact: { screen: Contact }
+  },
+  {
+    defaultNavigationOptions: ({navigation}) => ({
+      headerStyle: {
+          backgroundColor: '#FFA500'
+      },
+      headerTintColor: '#fff',
+      headerTitleStyle: {
+          color: 'blue'
+      },
+      headerLeft: <Icon
+        name='address-card'
+        type='font-awesome'
+        iconStyle={styles.stackIcon}
+        onPress={() => navigation.toggleDrawer()}
+      />
+    })
+  }
+);
+
 const CustomDrawerContentComponent = props => (
   <ScrollView>
     <SafeAreaView
@@ -95,6 +119,19 @@ const MainNavigator = createDrawerNavigator(
         drawerIcon: ({tintColor}) => (
           <Icon
             name='info-circle'
+            type='font-awesome'
+            size={24}
+            color={tintColor}
+          />
+        )
+      }
+    },
+    Contact: { 
+      screen: ContactNavigator,
+      navigationOptions: {
+        drawerIcon: ({tintColor}) => (
+          <Icon
+            name='address-card'
             type='font-awesome'
             size={24}
             color={tintColor}
