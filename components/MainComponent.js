@@ -3,23 +3,30 @@ import Home from './HomeComponent';
 import SafeAreaView from 'react-native-safe-area-view';
 import { View, Platform, StyleSheet, ScrollView, Image, Text } from 'react-native';
 import { createStackNavigator } from 'react-navigation-stack';
-import { createDrawerNavigator, DrawerItems, Draweritems } from 'react-navigation-drawer';
+import { createDrawerNavigator, DrawerItems } from 'react-navigation-drawer';
 import { createAppContainer } from 'react-navigation';
+import { Icon } from 'react-native-elements';
 
 const HomeNavigator = createStackNavigator(
   {
     Home: { screen: Home }
   },
   {
-    defaultNavigationOptions: {
+    defaultNavigationOptions: ({navigation}) => ({
       headerStyle: {
           backgroundColor: '#FFA500'
       },
       headerTintColor: '#fff',
       headerTitleStyle: {
-          color: '#fff'
-      }
-    }
+          color: 'blue'
+      },
+      headerLeft: <Icon
+        name='home'
+        type='font-awesome'
+        iconStyle={styles.stackIcon}
+        onPress={() => navigation.toggleDrawer()}
+      />
+    })
   }
 );
 
@@ -31,7 +38,7 @@ const CustomDrawerContentComponent = props => (
         <View style={styles.drawerHeader}>
           <View style={{flex: 1}}>
             <Image
-              source={require('../assets/images/StJo_logo.jpg')}
+              source={require('../assets/images/stjo_logo.jpg')}
               style={styles.drawerImage} />
           </View>
           <View style={{flex: 2}}>
@@ -45,11 +52,24 @@ const CustomDrawerContentComponent = props => (
 
 const MainNavigator = createDrawerNavigator(
   {
-    Home: { screen: HomeNavigator }
+    Home: { 
+      screen: HomeNavigator,
+      navigationOptions: {
+        drawerIcon: ({tintColor}) => (
+          <Icon
+            name='home'
+            type='font-awesome'
+            size={24}
+            color={tintColor}
+          />
+        )
+      }
+    }
 
   },
   {
-    drawerBackgroundColor: '#FFC04D'
+    drawerBackgroundColor: '#FFC04D',
+    contentComponent: CustomDrawerContentComponent
   }
 );
 
@@ -73,7 +93,7 @@ const styles = StyleSheet.create({
     flex: 1
   },
   drawerHeader: {
-    backgroundColor: '#FFA500',
+    backgroundColor: '#fff',
     height: 140,
     alignItems: 'center',
     justifyContent: 'center',
@@ -81,7 +101,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row'
   },
   drawerHeaderText: {
-    color: '#fff',
+    color: '#ffa500',
     fontSize: 24,
     fontWeight: 'bold'
   },
@@ -92,7 +112,7 @@ const styles = StyleSheet.create({
   },
   stackIcon: {
     marginLeft: 10,
-    color: '#fff',
+    color: 'blue',
     fontSize: 24
   }
 });
