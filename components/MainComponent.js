@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Home from './HomeComponent';
+import About from './AboutComponent';
 import SafeAreaView from 'react-native-safe-area-view';
 import { View, Platform, StyleSheet, ScrollView, Image, Text } from 'react-native';
 import { createStackNavigator } from 'react-navigation-stack';
@@ -22,6 +23,29 @@ const HomeNavigator = createStackNavigator(
       },
       headerLeft: <Icon
         name='home'
+        type='font-awesome'
+        iconStyle={styles.stackIcon}
+        onPress={() => navigation.toggleDrawer()}
+      />
+    })
+  }
+);
+
+const AboutNavigator = createStackNavigator(
+  {
+    About: { screen: About }
+  },
+  {
+    defaultNavigationOptions: ({navigation}) => ({
+      headerStyle: {
+          backgroundColor: '#FFA500'
+      },
+      headerTintColor: '#fff',
+      headerTitleStyle: {
+          color: 'blue'
+      },
+      headerLeft: <Icon
+        name='info-circle'
         type='font-awesome'
         iconStyle={styles.stackIcon}
         onPress={() => navigation.toggleDrawer()}
@@ -64,8 +88,20 @@ const MainNavigator = createDrawerNavigator(
           />
         )
       }
+    },
+    About: { 
+      screen: AboutNavigator,
+      navigationOptions: {
+        drawerIcon: ({tintColor}) => (
+          <Icon
+            name='info-circle'
+            type='font-awesome'
+            size={24}
+            color={tintColor}
+          />
+        )
+      }
     }
-
   },
   {
     drawerBackgroundColor: '#FFC04D',
