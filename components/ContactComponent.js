@@ -7,8 +7,8 @@ function RenderContact(){
         <Card title="Contact Information" wrapperStyle={{margin: 20}}>
             <View style={Styles.infoCard}>
                 <Image
-                    source={require('../assets/images/stjo_logo.jpg')}
-                    style={{width: 200, height: 250}}
+                    source={require('../assets/images/aeroscout2.jpg')}
+                    style={{width: 270, height: 250}}
                 />
                 <Text>StJo Farm</Text>
                 <Text>Versailles, KY 40383-9328</Text>
@@ -42,7 +42,7 @@ const Styles = StyleSheet.create({
         margin: 20
     },
     infoCard: {
-        paddingLeft: 20
+        paddingLeft: 10
     }
 });
 
